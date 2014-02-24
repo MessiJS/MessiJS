@@ -280,3 +280,4 @@ jQuery.extend(Messi, {
 
 $.Messi = Messi;
 })(jQuery);
+// vim: expandtab shiftwidth=2 tabstop=2 softtabstop=2:
