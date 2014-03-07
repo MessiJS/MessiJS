@@ -59,7 +59,7 @@ function Messi(data, options) {
       var btn = jQuery('<div class="btnbox"><button data-value="'+ _this.options.buttons[i].val +'" class="btn ' + cls + '" href="#">' + _this.options.buttons[i].label + '</button></div>');
       btn.on('click', 'button', function() {
         var value = jQuery(this).data('value');
-        var after = (_this.options.callback != null) ? function() { _this.options.callback(value); } : null;
+        var after = (_this.options.callback != null) ? function() { return _this.options.callback.call(this, value); } : null;
         _this.hide(after);
       });
 
@@ -165,9 +165,14 @@ Messi.prototype = {
   },
 
   hide: function(after) {
-
     if (!this.visible) return;
     var _this = this;
+
+    if (typeof after === 'function') {
+      if (after.call(this) == false) {
+        return this;
+      }
+    }
 
     this.messi.animate({opacity: 0}, 300, function() {
       if(_this.options.modal && _this.modal != null) _this.modal.remove();
@@ -175,7 +180,6 @@ Messi.prototype = {
       // Reactivate the scroll
       //document.documentElement.style.overflow = "visible";
       _this.visible = false;
-      if (after) after.call();
       if(_this.options.unload) _this.unload();
     });
 
