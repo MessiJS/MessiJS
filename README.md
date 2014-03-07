@@ -1,4 +1,6 @@
 An unofficial fork of the [Messi](https://github.com/marcosesperon/Messi) dialog.
+
+See [TODO.md](https://github.com/kgust/Messi/blob/master/TODO.md)
 *****
 
 # Messi
