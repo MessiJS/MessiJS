@@ -252,7 +252,8 @@ jQuery.extend(Messi, {
 
     }).error(function() {
 
-      console.log('Error loading ' + src);
+      // Be IE friendly
+      if (typeof window.console === 'object') console.log('Error loading ' + src);
 
     }).attr('src', src);
 
@@ -268,7 +269,8 @@ jQuery.extend(Messi, {
       dataType: 'html',
       cache: false,
       error: function (request, status, error) {
-        console.log(request.responseText);
+        // Be IE friendly
+        if (typeof window.console === 'object') console.log(request.responseText);
       },
       success: function(html) {
         //html = jQuery(html);
