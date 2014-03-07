@@ -1,3 +1,6 @@
+An unofficial fork of the [Messi](https://github.com/marcosesperon/Messi) dialog.
+*****
+
 # Messi
 A simple message plugin for jQuery.
 
