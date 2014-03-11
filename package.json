@@ -1,0 +1,47 @@
+{
+  "name": "Messi",
+  "version": "2.0.0-alpha",
+  "description": "A simple message plugin for jQuery",
+  "main": "messi.js",
+  "private": true,
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kgust/Messi.git"
+  },
+  "keywords": [
+    "messi",
+    "jQuery",
+    "message",
+    "plugin"
+  ],
+  "contributors": [
+    {
+      "name": "Marcos Esperón"
+    },
+    {
+      "name": "Kevin Gustavson",
+      "email": "kdgustavson@gmail.com",
+      "url": "http://kevingustavson.info/"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kgust/Messi/issues"
+  },
+  "homepage": "https://github.com/kgust/Messi",
+  "devDependencies": {
+    "mocha": "^1.17.1",
+    "chai": "^1.9.0",
+    "jquery": "^2.1.0",
+    "gulp": "^3.5.5",
+    "gulp-clean": "^0.2.4",
+    "gulp-jshint": "^1.5.0",
+    "gulp-mocha": "^0.4.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^0.2.1",
+    "gulp-watch": "^0.5.2"
+  }
+}

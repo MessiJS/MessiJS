@@ -1,4 +1,4 @@
-/*
+/**
  * jQuery Messi Plugin 1.3
  * https://github.com/marcosesperon/jquery-messi
  *
