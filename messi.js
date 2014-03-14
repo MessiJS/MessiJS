@@ -5,6 +5,10 @@
  * Copyright 2012, Marcos Esperón
  * http://marcosesperon.es
  *
+ * Newer Changes:
+ * Copyright 2014 Kevin Gustavson
+ * http://kevingustavson.info
+ *
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
