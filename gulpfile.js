@@ -3,17 +3,14 @@ var clean = require('gulp-clean');
 var coveralls = require('gulp-coveralls');
 var exec = require('gulp-exec');
 var jshint = require('gulp-jshint');
-var karma = require('karma').server;
 var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
-var gutil = require('gulp-util');
 
-var sources = ['messi.js', 'test/all.js'];
+var sources = ['messi.js', 'test/*.js'];
 
 gulp.task('clean', function() {
-    gulp
-        .src([ './messi.min.js', './messi.min.js.map', './messi.min.css' ])
+    gulp.src([ './messi.min.js', './messi.min.js.map', './messi.min.css' ])
         .pipe(clean());
 });
 
@@ -96,6 +93,11 @@ gulp.task('compress', ['clean'], function() {
         .pipe(gulp.dest('./'));
 });
 
+gulp.task('codecoverage', function() {
+    gulp.src('test/coverage/**/lcov.info')
+        .pipe(coveralls());
+});
+
 gulp.task('watch', function() {
     gulp
         .src(sources)
@@ -105,7 +107,7 @@ gulp.task('watch', function() {
         }));
 });
 
-gulp.task('default', ['lint', 'compress', 'test']);
+gulp.task('default', ['lint', 'compress', 'test', 'codecoverage']);
 
 gulp.task('travis-test', ['lint', 'compress', 'test', 'coveralls']);
 
