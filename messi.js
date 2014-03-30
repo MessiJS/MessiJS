@@ -372,17 +372,10 @@
 
         ask: function (data, callback, options) {
 
-            var buttons = [{
-                id: 'yes',
-                label: 'Yes',
-                val: 'Y',
-                "class": 'btn-success'
-            }, {
-                id: 'no',
-                label: 'No',
-                val: 'N',
-                "class": 'btn-danger'
-            }, ];
+            var buttons = [
+                { id: 'yes', label: 'Yes', val: 'Y', "class": 'btn-success' },
+                { id: 'no', label: 'No', val: 'N', "class": 'btn-danger' }
+            ];
 
             options = jQuery.extend({
                 closeButton: false,
@@ -474,4 +467,4 @@
     jQuery.Messi = Messi;
 
 })();
-// vim: expandtab shiftwidth=2 tabstop=2 softtabstop=2:
+// vim: expandtab shiftwidth=4 tabstop=4 softtabstop=4:
