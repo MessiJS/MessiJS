@@ -1,5 +1,3 @@
-/* jshint expr:true  */
-
 var expect = chai.expect;
 
 beforeEach(function(done) {
@@ -8,16 +6,6 @@ beforeEach(function(done) {
         //$(document).width(800).height(600);
         done();
     }, 25);
-});
-
-describe('Before we begin the window', function() {
-    it('should be 400px wide', function() {
-        expect(window.innerWidth).to.equal(400);
-    });
-
-    it('should be 300px high', function() {
-        expect(window.innerHeight).to.equal(300);
-    });
 });
 
 describe('Creating a simple Messi window', function() {
@@ -72,10 +60,9 @@ describe('Creating a simple Messi window', function() {
         }, 100);
     });
 
-    it('should have a hidden close button', function() {
+    it('should have a close button', function() {
         var dialog = new $.Messi('my message');
         expect($('.messi-closebtn').get(0)).to.be.defined;
-        expect($('.messi-closebtn').css('opacity')).to.equal('1');
         dialog.unload();
     });
 
@@ -224,7 +211,8 @@ describe('Message with custom buttons (yes/no/cancel)', function() {
         dialog = new $.Messi(
             'This is a message with Messi with custom buttons.',
             {
-                title: 'Buttons', buttons: [
+                title: 'Buttons',
+                buttons: [
                     {id: 0, label: 'Yes', val: 'Y'},
                     {id: 1, label: 'No', val: 'N'},
                     {id: 2, label: 'Cancel', val: 'C'}
@@ -259,8 +247,8 @@ describe('Message with custom buttons (yes/no) and style classes', function() {
             {
                 title: 'Buttons',
                 buttons: [
-                    {id: 0, label: 'Yes', val: 'Y', class: 'btn-success'},
-                    {id: 1, label: 'No', val: 'N', class: 'btn-danger'}
+                    {id: 0, label: 'Yes', val: 'Y', 'class': 'btn-success'},
+                    {id: 1, label: 'No', val: 'N', 'class': 'btn-danger'}
                 ]
             }
         );

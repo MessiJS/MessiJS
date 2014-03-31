@@ -1,0 +1,20 @@
+{
+    "camelcase": true,
+    "boss":      false,
+    "curly":     true,
+    "eqeqeq":    true,
+    "eqnull":    true,
+    "expr":      true,
+    "immed":     true,
+    "indent":    4,
+    "loopfunc":  true,
+    "noarg":     true,
+    "onevar":    false,
+    "quotmark":  "single",
+    "smarttabs": true,
+    "trailing":  true,
+    "undef":     false,
+    "unused":    false,
+
+    "jquery":    true
+}

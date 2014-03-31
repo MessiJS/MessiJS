@@ -11,9 +11,10 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
-// jshint -W083
 // Main class
 (function () {
+    'use strict';
+
     function Messi(data, options) {
 
         var close;
@@ -72,7 +73,7 @@
 
             for (var i = 0; i < _this.options.buttons.length; i++) {
 
-                var cls = (_this.options.buttons[i]["class"]) ? _this.options.buttons[i]["class"] : '';
+                var cls = (_this.options.buttons[i]['class']) ? _this.options.buttons[i]['class'] : '';
                 var btn = '<button data-value="' + _this.options.buttons[i].val + '" class="btn ' + cls + '" href="#">' + _this.options.buttons[i].label + '</button>';
                 btn = jQuery('<div class="btnbox">' + btn + '</div>', {});
 
@@ -85,7 +86,7 @@
                         var value = jQuery(this)
                             .data('value');
 
-                        if (typeof _this.options.callback === "function") {
+                        if (typeof _this.options.callback === 'function') {
                             after = btnCallback;
                         }
                         _this.hide(after);
@@ -128,7 +129,7 @@
             .appendTo(document.body) : null;
 
         // Show the message
-        if (_this.options.show) _this.show();
+        if (_this.options.show) { _this.show(); }
 
         // Control the resizing of the display
         jQuery(window)
@@ -189,15 +190,15 @@
         viewport: function () {
 
             return {
-                top: ((jQuery(window).height() - this.messi.height()) / 2) + jQuery(window).scrollTop() + "px",
-                left: ((jQuery(window).width() - this.messi.width()) / 2) + jQuery(window).scrollLeft() + "px"
+                top: ((jQuery(window).height() - this.messi.height()) / 2) + jQuery(window).scrollTop() + 'px',
+                left: ((jQuery(window).width() - this.messi.width()) / 2) + jQuery(window).scrollLeft() + 'px'
             };
 
         },
 
         show: function () {
 
-            if (this.visible) return;
+            if (this.visible) { return; }
 
             if (this.messi.parent().length === 0) {
                 // or unload in case of first call
@@ -236,7 +237,7 @@
 
         hide: function (after) {
 
-            if (!this.visible) return;
+            if (!this.visible) { return; }
             var _this = this;
 
             if (typeof after === 'function') {
@@ -311,8 +312,8 @@
         nudge: function () {
             // this.options.viewport.top, this.options.viewport.left
             var win = jQuery(window);
-            var x = (this.options.viewport.left).replace("px", "");
-            var y = (this.options.viewport.top).replace("px", "");
+            var x = (this.options.viewport.left).replace('px', '');
+            var y = (this.options.viewport.top).replace('px', '');
 
             if (this.isNumber(x) && this.isNumber(y)) {
                 x = parseInt(x, 10);
@@ -329,14 +330,14 @@
                 if ((y + this.messi.height()) > (win.height() + jQuery(document).scrollTop())) {
                     y -= this.messi.height() + this.options.minMargin;
                 }
-                this.options.viewport.left = x.toString() + "px";
-                this.options.viewport.top = y.toString() + "px";
+                this.options.viewport.left = x.toString() + 'px';
+                this.options.viewport.top = y.toString() + 'px';
             }
         },
 
         max: function (a, b) {
-            if (a > b) return a;
-            else return b;
+            if (a > b) { return a; }
+            else { return b; }
         },
 
         isNumber: function (n) {
@@ -373,8 +374,8 @@
         ask: function (data, callback, options) {
 
             var buttons = [
-                { id: 'yes', label: 'Yes', val: 'Y', "class": 'btn-success' },
-                { id: 'no', label: 'No', val: 'N', "class": 'btn-danger' }
+                { id: 'yes', label: 'Yes', val: 'Y', 'class': 'btn-success' },
+                { id: 'no', label: 'No', val: 'N', 'class': 'btn-danger' }
             ];
 
             options = jQuery.extend({
@@ -425,7 +426,9 @@
             .error(function () {
 
                 // Be IE friendly
-                if (typeof window.console === 'object') console.log('Error loading ' + src);
+                if (typeof window.console === 'object') {
+                    console.log('Error loading ' + src);
+                }
 
             })
             .attr('src', src);
@@ -447,7 +450,9 @@
                 cache: false,
                 error: function (request, status, error) {
                     // Be IE friendly
-                    if (typeof window.console === 'object') console.log(request.responseText);
+                    if (typeof window.console === 'object') {
+                        console.log(request.responseText);
+                    }
                 },
                 success: function (html) {
                     new Messi(html, options);
