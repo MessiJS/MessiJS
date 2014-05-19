@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/messijs/messijs.png?label=ready&title=Ready)](https://waffle.io/messijs/messijs)
 # MessiJS [![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS) [![Coverage Status](https://coveralls.io/repos/MessiJS/MessiJS/badge.png)](https://coveralls.io/r/MessiJS/MessiJS)
 
 An easy to use message plugin for jQuery.
