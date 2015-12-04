@@ -6,9 +6,11 @@
   "style": "./dist/messi.css",
   "scripts": {
     "test": "gulp travis-test",
+    "precommit": "gulp lint test",
     "coveralls": "gulp codecoverage",
     "watch": "node_modules/karma/bin/karma start --no-single-run --auto-watch"
   },
+  "pre-commit": ["precommit"],
   "repository": {
     "type": "git",
     "url": "git://github.com/MessiJS/MessiJS.git"
@@ -67,6 +69,7 @@
     "mocha": "^1.18.2",
     "mocha-lcov-reporter": "0.0.1",
     "mocha-phantomjs": "^3.3.2",
+    "pre-commit": "^1.1.2",
     "sinon": "^1.9.0"
   }
 }
