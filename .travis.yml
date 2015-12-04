@@ -1,14 +1,17 @@
 language: node_js
 
 node_js:
+  - "4.1"
+  - "4.0"
+  - '0.12'
   - '0.10'
   #- '0.11'
 
 env:
   - JQUERY="jquery-1.7.0"
-  - JQUERY="jquery-1.11.1"
+  - JQUERY="jquery-1.11.3"
   - JQUERY="jquery-2.0.3"
-  - JQUERY="jquery-2.1.1"
+  - JQUERY="jquery-2.1.4"
 
 before_script:
     - curl http://code.jquery.com/${JQUERY}.min.js >jquery.min.js
