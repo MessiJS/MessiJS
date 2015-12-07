@@ -1,20 +1,20 @@
 var pkg = require('./package.json');
 
-var gulp = require('gulp');
-var clean = require('gulp-clean');
-var concat = require('gulp-concat');
-var coveralls = require('gulp-coveralls');
+var gulp        = require('gulp');
+var concat      = require('gulp-concat');
+var coveralls   = require('gulp-coveralls');
+var del         = require('del');
 var eventStream = require('event-stream');
-var insert = require('gulp-insert');
-var jshint = require('gulp-jshint');
-var karma = require('gulp-karma');
-var minifyCSS = require('gulp-minify-css');
-var notify = require('gulp-notify');
-var rename = require('gulp-rename');
-var sourcemaps = require('gulp-sourcemaps');
-var uglify = require('gulp-uglify');
-var zip = require('gulp-zip');
-var gutil = require('gulp-util');
+var insert      = require('gulp-insert');
+var jshint      = require('gulp-jshint');
+var Karma       = require('karma').Server;
+var minifyCSS   = require('gulp-minify-css');
+var notify      = require('gulp-notify');
+var rename      = require('gulp-rename');
+var sourcemaps  = require('gulp-sourcemaps');
+var uglify      = require('gulp-uglify');
+var zip         = require('gulp-zip');
+var gutil       = require('gulp-util');
 
 var sources = ['src/*.js', 'test/*Spec.js'];
 
@@ -30,8 +30,7 @@ var banner = [
     ''].join('\n');
 
 gulp.task('clean', function() {
-    gulp.src([ 'dist/*', 'coverage' ])
-        .pipe(clean());
+    return del([ 'dist/*', 'coverage' ]);
 });
 
 gulp.task('lint', function() {
@@ -84,26 +83,14 @@ gulp.task('add-banner', ['combine', 'compress'], function() {
     );
 });
 
-gulp.task('test', ['combine'], function() {
-    return gulp.src([
-        'node_modules/mocha/mocha.js',
-        'node_modules/chai/chai.js',
-        'jquery.min.js',
-        'src/_main.js',
-        //'src/extensions.js',
-        'test/_mainSpec.js',
-        //'test/privateFunctionsSpec.js',
-        //'test/extensionsSpec.js',
-        //'test/todoSpec.js',
-        'src/*.css'
-    ])
-        .pipe(karma({
-            configFile: 'karma.conf.js',
-            action: 'run'
-        }));
+gulp.task('test', ['lint'], function(done) {
+    var server = new Karma({
+        configFile: __dirname + '/karma.conf.js'
+    }, function() { done(); process.exit(); });
+    server.start();
 });
 
-gulp.task('coveralls', ['test'], function() {
+gulp.task('codecoverage', ['test', 'combine'], function() {
     return gulp.src('coverage/**/lcov.info')
         .pipe(coveralls());
 });
@@ -128,7 +115,7 @@ gulp.task('notify:zip', ['zip'], function() {
         .pipe(notify({ message: 'Zip file has been created.' }));
 });
 
-gulp.task('default', ['lint', 'zip', 'test']);
-gulp.task('travis-test', ['lint', 'coveralls']);
+gulp.task('default', ['zip', 'test']);
+gulp.task('travis-test', ['codecoverage']);
 
 module.exports = gulp;
