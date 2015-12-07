@@ -92,6 +92,7 @@ gulp.task('test', ['combine'], function() {
         'src/_main.js',
         //'src/extensions.js',
         'test/_mainSpec.js',
+        'test/accessibilitySpec.js',
         //'test/privateFunctionsSpec.js',
         //'test/extensionsSpec.js',
         //'test/todoSpec.js',

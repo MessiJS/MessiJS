@@ -14,12 +14,13 @@
       mocha.reporter('html');
       expect = chai.expect;
     </script>
-    <script src="../src/main.js"></script>
+    <script src="../src/_main.js"></script>
     <script src="../src/extensions.js"></script>
-    <script src="../test/mainSpec.js"></script>
-    <script src="../test/extensionsSpec.js"></script>
-    <script src="../test/privateFunctionsSpec.js"></script>
-    <script src="../test/todoSpec.js"></script>
+    <script src="_mainSpec.js"></script>
+    <script src="accessibilitySpec.js"></script>
+    <!-- <script src="extensionsSpec.js"></script> -->
+    <!-- <script src="privateFunctionsSpec.js"></script> -->
+    <!-- <script src="todoSpec.js"></script> -->
     <script>
       if (window.mochaPhantomJS) {
           mochaPhantomJS.run();
