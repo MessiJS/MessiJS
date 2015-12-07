@@ -29,8 +29,8 @@ var banner = [
     ' */',
     ''].join('\n');
 
-gulp.task('clean', function() {
-    return del([ 'dist/*', 'coverage' ]);
+gulp.task('clean', function(done) {
+    return del([ 'dist', 'coverage' ], done);
 });
 
 gulp.task('lint', function() {
@@ -85,14 +85,15 @@ gulp.task('add-banner', ['combine', 'compress'], function() {
 
 gulp.task('test', ['lint'], function(done) {
     var server = new Karma({
-        configFile: __dirname + '/karma.conf.js'
-    }, function() { done(); process.exit(); });
-    server.start();
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, done());
+    return server.start();
 });
 
-gulp.task('codecoverage', ['test', 'combine'], function() {
+gulp.task('codecoverage', ['test'], function(done) {
     return gulp.src('coverage/**/lcov.info')
-        .pipe(coveralls());
+        .pipe(coveralls(done));
 });
 
 gulp.task('zip', ['add-banner'], function() {
