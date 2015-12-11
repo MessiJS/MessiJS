@@ -1,4 +1,9 @@
-# MessiJS [![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS) [![Coverage Status](https://coveralls.io/repos/MessiJS/MessiJS/badge.png)](https://coveralls.io/r/MessiJS/MessiJS) [![Stories in Ready](https://badge.waffle.io/messijs/messijs.png?label=ready&title=Ready)](https://waffle.io/messijs/messijs) [![Dependencies](https://david-dm.org/messijs/messijs.png)](https://david-dm.org/messijs/messijs)
+# MessiJS
+[![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS)
+[![Coverage Status](https://coveralls.io/repos/MessiJS/MessiJS/badge.png)](https://coveralls.io/r/MessiJS/MessiJS)
+[![Stories in Ready](https://badge.waffle.io/messijs/messijs.png?label=ready&title=Ready)](https://waffle.io/messijs/messijs)
+[![Dependency Status](https://david-dm.org/messijs/messijs.svg)](https://david-dm.org/messijs/messijs)
+[![devDependency Status](https://david-dm.org/messijs/messijs/dev-status.svg)](https://david-dm.org/messijs/messijs#info=devDependencies)
 
 **A simple, elegant message plugin for jQuery.**
 
