@@ -20,8 +20,8 @@ module.exports = function(config) {
             'karma-coverage',
             'karma-phantomjs-launcher',
             'karma-mocha',
-            'karma-mocha-reporter',
-            'karma-osx-reporter'
+            'karma-mocha-reporter'
+            // 'karma-osx-reporter'
         ],
         preprocessors: {'src/*.js': ['coverage']},
         reporters: ['mocha', 'osx', 'coverage'],

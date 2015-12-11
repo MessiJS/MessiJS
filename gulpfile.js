@@ -84,11 +84,10 @@ gulp.task('add-banner', ['combine', 'compress'], function() {
 });
 
 gulp.task('test', ['lint'], function(done) {
-    var server = new Karma({
+    return Karma.start({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
-    }, done());
-    return server.start();
+    }, done);
 });
 
 gulp.task('codecoverage', ['test'], function(done) {
