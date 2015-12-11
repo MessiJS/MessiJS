@@ -7,9 +7,9 @@ module.exports = function(config) {
             'node_modules/mocha/mocha.js',
             'node_modules/chai/chai.js',
             'jquery.min.js',
-            'src/main.js',
+            'src/_main.js',
             //'src/extensions.js',
-            'test/mainSpec.js',
+            'test/_mainSpec.js',
             //'test/privateFunctionsSpec.js',
             //'test/extensionsSpec.js',
             //'test/todoSpec.js',
@@ -20,8 +20,8 @@ module.exports = function(config) {
             'karma-coverage',
             'karma-phantomjs-launcher',
             'karma-mocha',
-            'karma-mocha-reporter',
-            'karma-osx-reporter'
+            'karma-mocha-reporter'
+            // 'karma-osx-reporter'
         ],
         preprocessors: {'src/*.js': ['coverage']},
         reporters: ['mocha', 'osx', 'coverage'],
