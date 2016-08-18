@@ -3,6 +3,7 @@ layout: github
 title: Options
 ---
 # MessiJS Options
+
 Option            | Default                                 | Description
 ----------------- | --------------------------------------- | ----------------------------------------------------------------------
 animate[²](#201)  | {&nbsp;open:&nbsp;'bounceIn',<br>&nbsp;&nbsp;close:&nbsp;'bounceOut'&nbsp;} | default animation<br>(disable by setting animate: false)<br>See [Animate.css](http://daneden.github.io/animate.css) for valid options.

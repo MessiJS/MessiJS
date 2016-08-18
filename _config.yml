@@ -1,18 +1,9 @@
 name: Your New Jekyll Site
-#markdown: kramdown
-markdown: redcarpet
+markdown: kramdown
 baseurl: "/MessiJS"
 permalink: pretty
-highlighter: pygments
 exclude:
     - node_modules
     - Gemfile
     - Gemfile.lock
     - params.json
-redcarpet:
-    extensions:
-        - no_intra_emphasis
-        - fenced_code_blocks
-        - autolink
-        - tables
-        - with_toc_data
