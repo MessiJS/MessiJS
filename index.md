@@ -19,7 +19,7 @@ Changelog
 ---------
 2.0.1 [23-Dec-2014]
 
-* Added support for [Animate.css](http://daneden.github.io/animate.css). See [Options](http://messijs.github.io/MessiJS/options/) for more details.
+* Added support for [Animate.css](http://daneden.github.io/animate.css). See [Options](//messijs.github.io/MessiJS/options/) for more details.
 * Cleaned up position|viewport option handling.
 * Bug fixes.
 
