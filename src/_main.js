@@ -57,8 +57,15 @@
         if (_this.options.buttons.length > 0) {
 
             for (var i = 0; i < _this.options.buttons.length; i++) {
-                var btnbox = jQuery('<div>', {'class':'messi-btnbox'})
-                    .css('width', parseInt(100/_this.options.buttons.length, 10) + '%');
+                var btnbox = jQuery('<div>', {'class':'messi-btnbox'});
+                
+                if (_this.options.buttonsAlign === 'center') {
+                    btnbox.css('width', parseInt(100/_this.options.buttons.length, 10) + '%');
+                } else if (_this.options.buttonsAlign === 'left') {
+                    btnbox.css('padding-left', '10px');
+                } else {
+                    btnbox.css({'padding-right': '10px', 'float': 'right'});
+                }
                 var cls = (_this.options.buttons[i]['class']) ? _this.options.buttons[i]['class'] : '';
                 var btn = jQuery('<button>', {
                     href: '#',
@@ -107,7 +114,7 @@
 
         // Activate the modal screen
         if (_this.options.modal) {
-            _this.modal = jQuery('<div class="messi-modal"></div>')
+            _this.modal = jQuery('<div class="messi-modal" tabindex="-1"></div>')
             .css({
                 opacity: _this.options.modalOpacity,
                 width: jQuery(document).width(),
@@ -145,8 +152,10 @@
 
         options: {
             animate: { open: 'bounceIn', close: 'bounceOut' },  // default animation (disable by setting animate: false)
+            ariaPageContent: null,                                // selector of the main page content for maximum accessibility
             autoclose: null,                                    // autoclose message after 'x' miliseconds, i.e: 5000
             buttons: [],                                        // array of buttons, i.e: [{id: 'ok', label: 'OK', val: 'OK'}]
+            buttonsAlign: 'center',                             // buttons alignment: center, left, right
             callback: null,                                     // callback function after close message
             center: true,                                       // center message on screen
             closeButton: true,                                  // show close button in header title (or content if buttons array is empty).
@@ -164,9 +173,53 @@
             width: '500px',                                     // message width
             zIndex: 99999                                       // first dialog z-index
         },
-        template: '<div class="messi"><div class="messi-box"><div class="messi-wrapper"><div class="messi-titlebox"><span class="messi-title"></span></div><div class="messi-content"></div><div class="messi-footbox"><div class="messi-actions"></div></div></div></div></div>',
+        template: '<div class="messi"><div class="messi-box" role="dialog" aria-hidden="true" aria-labelledby="messiTitle"><div class="messi-wrapper"><div class="messi-titlebox"><h1 class="messi-title" id="messiTitle"></h1></div><div class="messi-content"></div><div class="messi-footbox"><div class="messi-actions"></div></div></div></div></div>',
         content: '<div></div>',
         visible: false,
+        focusableElementsString: 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]',
+
+        trapTabKey: function(obj,evt) {
+
+          // if tab or shift-tab pressed
+          if ( evt.which === 9 ) {
+
+            // get list of all children elements in given object
+            var o = obj.find('*');
+
+            // get list of focusable items
+            var focusableItems;
+            focusableItems = o.filter(this.focusableElementsString).filter(':visible');
+
+            // get currently focused item
+            var focusedItem;
+            focusedItem = jQuery(':focus');
+
+            // get the number of focusable items
+            var numberOfFocusableItems;
+            numberOfFocusableItems = focusableItems.length;
+
+            // get the index of the currently focused item
+            var focusedItemIndex;
+            focusedItemIndex = focusableItems.index(focusedItem);
+
+            if (evt.shiftKey) {
+              //back tab
+              // if focused on first item and user preses back-tab, go to the last focusable item
+              if(focusedItemIndex===0){
+                focusableItems.get(numberOfFocusableItems-1).focus();
+                evt.preventDefault();
+              }
+
+            } else {
+              //forward tab
+              // if focused on the last item and user preses tab, go to the first focusable item
+              if(focusedItemIndex===numberOfFocusableItems-1){
+                focusableItems.get(0).focus();
+                evt.preventDefault();
+              }
+            }
+          }
+        },
 
         setContent: function (data) {
             jQuery('.messi-content', this.messi)
@@ -190,6 +243,10 @@
         show: function () {
 
             if (this.visible) { return; }
+            
+            // accessibility taken from: http://accessibility.oit.ncsu.edu/blog/2013/09/13/the-incredible-accessible-modal-dialog/
+            // save current focus
+            this.focusedElementBeforeModal = jQuery(':focus');
 
             if (this.messi.parent().length === 0) {
                 // or unload in case of first call
@@ -217,8 +274,25 @@
             if (this.options.animate) {
                 this.messi.addClass('animated '+this.options.animate.open);
             }
+            
+            if (this.options.ariaPageContent) {
+                jQuery(this.options.ariaPageContent).attr('aria-hidden', 'true');
+                jQuery(this.messi).attr('aria-hidden', 'false');
+            }
 
             this.messi.show();
+            
+            var _this = this;
+            this.messi.off('keydown')
+                    .on('keydown', function(event){_this.trapTabKey($(this),event);});
+            
+            // get list of all children elements in given object
+            var o = this.messi.find('*');
+
+            // set focus to first focusable item
+            var focusableItems;
+            focusableItems = o.filter(this.focusableElementsString).filter(':visible').first().focus();
+
 
             // Get the center of the screen if the center option is on
             if (this.options.center) {
@@ -238,6 +312,14 @@
 
             if (!this.visible) { return; }
             var _this = this;
+            
+            // set focus back to element that had it before the modal was opened
+            this.focusedElementBeforeModal.focus();
+            
+            if (this.options.ariaPageContent) {
+                jQuery(this.options.ariaPageContent).attr('aria-hidden', 'false');
+                jQuery(this.messi).attr('aria-hidden', 'true');
+            }
 
             if (this.options.animate) {
                 this.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {

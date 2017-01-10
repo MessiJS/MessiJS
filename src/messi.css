@@ -186,6 +186,11 @@
   background-color: #61b832;
 }
 
+h1.messi-title {
+    font-size: 1em;
+    margin: 0;
+}
+
 @-moz-keyframes animate-bg
 {
   from { background-position: 0 0; }
@@ -213,6 +218,7 @@
   margin-bottom: 0;
   *margin-left: .3em;
   font-size: 13px;
+  min-width: 80px;
   line-height: 26px;
   color: #333;
   text-align: center;
