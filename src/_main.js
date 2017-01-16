@@ -31,7 +31,7 @@
 
                 // Close button required
                 close = jQuery('<span class="messi-closebtn"></span>');
-                close.bind('click', function () {
+                close.on('click.MessiJS', function () {
                     _this.hide();
                 });
 
@@ -94,7 +94,7 @@
 
             if (_this.options.closeButton) {
                 close = jQuery('<span class="messi-closebtn"></span>');
-                close.bind('click', function () {
+                close.on('click.MessiJS', function () {
                     _this.hide();
                 });
 
@@ -120,11 +120,6 @@
 
         // Show the message
         if (_this.options.show) { _this.show(); }
-
-        // Control the resizing of the display
-        jQuery(window).bind('resize scroll', function () {
-            _this.resize();
-        });
 
         // Configure the automatic closing
         if (_this.options.autoclose !== null) {
@@ -232,6 +227,8 @@
 
             this.visible = true;
 
+            // Control the resizing of the display
+            jQuery(window).on('resize.MessiJS scroll.MessiJS', this, Messi.prototype.resize);
         },
 
         hide: function () {
@@ -274,8 +271,9 @@
 
         },
 
-        resize: function () {
-            if (this.options.modal) {
+        resize: function (event) {
+            var _this = event.data;
+            if (_this.options.modal) {
                 jQuery('.messi-modal')
                     .css({
                         width: jQuery(document).width(),
@@ -283,10 +281,10 @@
                     });
             }
 
-            if (this.options.center) {
-                this.center();
-            } else if(this.options.margin > 0) {
-                this.enforceMargin();
+            if (_this.options.center) {
+                _this.center();
+            } else if(_this.options.margin > 0) {
+                _this.enforceMargin();
             }
         },
 
@@ -301,7 +299,7 @@
             }
 
             jQuery(window)
-                .unbind('resize scroll');
+                .off('resize.MessiJS scroll.MessiJS', Messi.prototype.resize);
 
             if (this.modal) {
                 this.modal.remove();

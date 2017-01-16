@@ -233,7 +233,7 @@ describe('Create a modal Messi window', function() {
     });
 
     it('should open a modal background', function() {
-        jQuery(window).trigger('resize');
+        jQuery(window).trigger('resize.MessiJS');
         expect(jQuery('.messi-modal', dialog.jqueryize()).get(0)).to.be.defined;
     });
 });
@@ -250,7 +250,7 @@ describe('Create an absolutely positioned Messi window', function() {
             }
         );
 
-        jQuery(window).trigger('resize');
+        jQuery(window).trigger('resize.MessiJS');
         var position = dialog.jqueryize().position();
         expect(position).to.eql({top: 52, left: 138});
         dialog.unload();
@@ -267,7 +267,7 @@ describe('Create an absolutely positioned Messi window', function() {
             }
         );
 
-        jQuery(window).trigger('resize');
+        jQuery(window).trigger('resize.MessiJS');
         var position = dialog.jqueryize().position();
         expect(position).to.eql({top: 52, left: 138});
         dialog.unload();
@@ -417,7 +417,7 @@ describe('Window with error title (animated)', function() {
 
 describe('Window with a margin', function() {
     it('when center is on', function() {
-        jQuery(window).trigger('resize');
+        jQuery(window).trigger('resize.MessiJS');
         dialog = new Messi('This is a message with Messi.', {
             title: 'Margin Center Test',
             center: true,
@@ -450,7 +450,7 @@ describe('Window with a margin', function() {
             position: { top: -15, left: -15 }
         });
 
-        jQuery(window).trigger('resize');
+        jQuery(window).trigger('resize.MessiJS');
         dialog.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
             expect(dialog.jqueryize().position()).to.eql({top: 15, left: 15});
             dialog.unload();
@@ -488,5 +488,37 @@ describe('Window with a margin', function() {
             expect(dialog.jqueryize().position()).to.eql({top: 15, left: newLeft});
             dialog.unload();
         });
+    });
+});
+
+describe('Events are unbound on close', function() {
+    it('when modal is closed, event are unbound', function(done) {
+        dialog = new Messi('This is a message with Messi.', {
+            title: 'Margin Center Test',
+            center: true,
+            margin: 15,
+            position: { top: '10px', left: '10px' }
+        });
+
+        setTimeout(function() {
+            var events = jQuery._data(window, 'events');
+
+            // expect modal events to be bound
+            expect(events).to.contain.keys('resize');
+            expect(events.resize[0].type).to.equal('resize');
+            expect(events.resize[0].namespace).to.equal('MessiJS');
+
+            expect(events).to.contain.keys('scroll');
+            expect(events.scroll[0].type).to.equal('scroll');
+            expect(events.scroll[0].namespace).to.equal('MessiJS');
+
+            dialog.unload();
+
+            // expect modal events to be unbound
+            expect(events).to.not.contain.keys('resize');
+            expect(events).to.not.contain.keys('scroll');
+            done();
+        }, 50);
+
     });
 });
