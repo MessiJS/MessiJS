@@ -1,9 +1,6 @@
-$('code.language-javascript').each(function(index, el) {
+$('.language-javascript code').each(function(index, el) {
     var $this = $(this);
     var js = $this.text()
-
-    //var $par = $this.before('<p>RUN</p>');
-    //$par.css('float', 'right');
 
     $('<a href="">RUN</a>')
         .insertBefore(this)
