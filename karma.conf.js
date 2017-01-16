@@ -24,7 +24,7 @@ module.exports = function(config) {
             // 'karma-osx-reporter'
         ],
         preprocessors: {'src/*.js': ['coverage']},
-        reporters: ['mocha', 'osx', 'coverage'],
+        reporters: ['mocha',/* 'osx'*/, 'coverage'],
         singleRun: true
     });
 
