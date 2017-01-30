@@ -1,6 +1,7 @@
 (function () {
     'use strict';
 
+    // initialize
     function Messi(data, options) {
 
         var close;
@@ -108,14 +109,14 @@
         // Activate the modal screen
         if (_this.options.modal) {
             _this.modal = jQuery('<div class="messi-modal"></div>')
-            .css({
-                opacity: _this.options.modalOpacity,
-                width: jQuery(document).width(),
-                height: jQuery(document).height(),
-                position: 'fixed',
-                'z-index': _this.options.zIndex + jQuery('.messi').length
-            })
-            .appendTo(document.body);
+                .css({
+                    opacity: _this.options.modalOpacity,
+                    width: jQuery(document).width(),
+                    height: jQuery(document).height(),
+                    position: 'fixed',
+                    'z-index': _this.options.zIndex + jQuery('.messi').length
+                })
+                .appendTo(document.body);
         }
 
         // Show the message
@@ -239,32 +240,34 @@
             if (this.options.animate) {
                 this.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                     _this.visible = false;
-                    if (_this.options.unload) {
-                        _this.unload();
+
+                    if (_this.options.modal) {
+                        _this.modal.css({ display: 'none' });
                     }
+
+                    // FIXME disabling option `unload: false`, needs to be re-enabled
+                    // if (_this.options.unload) {
+                        _this.unload();
+                    // }
                 });
 
                 this.messi.removeClass(this.options.animate.open).addClass(this.options.animate.close);
             } else {
-                this.messi.animate({
-                    opacity: 0
-                }, 300, function () {
-                    if (_this.options.modal) {
-                        _this.modal.css({
-                            display: 'none'
-                        });
-                    }
-                    _this.messi.css({
-                        display: 'none'
-                    });
+                if (_this.options.modal) {
+                    _this.modal.css({ display: 'none' });
+                }
 
-                    // Reactivate the scroll
-                    //document.documentElement.style.overflow = "visible";
-                    _this.visible = false;
-                    if (_this.options.unload) {
-                        _this.unload();
-                    }
-                });
+                _this.messi.css({ display: 'none' });
+
+                // Reactivate the scroll
+                //document.documentElement.style.overflow = "visible";
+
+                _this.visible = false;
+
+                // FIXME disabling option `unload: false`, needs to be re-enabled
+                // if (_this.options.unload) {
+                    _this.unload();
+                // }
             }
 
             return this;
@@ -298,8 +301,7 @@
                 this.hide();
             }
 
-            jQuery(window)
-                .off('resize.MessiJS scroll.MessiJS', Messi.prototype.resize);
+            jQuery(window).off('resize.MessiJS scroll.MessiJS', Messi.prototype.resize);
 
             if (this.modal) {
                 this.modal.remove();
