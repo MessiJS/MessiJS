@@ -1,6 +1,7 @@
 (function () {
     'use strict';
 
+    // initialize
     function Messi(data, options) {
 
         var close;
@@ -31,7 +32,7 @@
 
                 // Close button required
                 close = jQuery('<span class="messi-closebtn"></span>');
-                close.bind('click', function () {
+                close.on('click.MessiJS', function () {
                     _this.hide();
                 });
 
@@ -94,7 +95,7 @@
 
             if (_this.options.closeButton) {
                 close = jQuery('<span class="messi-closebtn"></span>');
-                close.bind('click', function () {
+                close.on('click.MessiJS', function () {
                     _this.hide();
                 });
 
@@ -108,23 +109,18 @@
         // Activate the modal screen
         if (_this.options.modal) {
             _this.modal = jQuery('<div class="messi-modal"></div>')
-            .css({
-                opacity: _this.options.modalOpacity,
-                width: jQuery(document).width(),
-                height: jQuery(document).height(),
-                position: 'fixed',
-                'z-index': _this.options.zIndex + jQuery('.messi').length
-            })
-            .appendTo(document.body);
+                .css({
+                    opacity: _this.options.modalOpacity,
+                    width: jQuery(document).width(),
+                    height: jQuery(document).height(),
+                    position: 'fixed',
+                    'z-index': _this.options.zIndex + jQuery('.messi').length
+                })
+                .appendTo(document.body);
         }
 
         // Show the message
         if (_this.options.show) { _this.show(); }
-
-        // Control the resizing of the display
-        jQuery(window).bind('resize scroll', function () {
-            _this.resize();
-        });
 
         // Configure the automatic closing
         if (_this.options.autoclose !== null) {
@@ -232,6 +228,8 @@
 
             this.visible = true;
 
+            // Control the resizing of the display
+            jQuery(window).on('resize.MessiJS scroll.MessiJS', this, Messi.prototype.resize);
         },
 
         hide: function () {
@@ -242,40 +240,43 @@
             if (this.options.animate) {
                 this.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                     _this.visible = false;
-                    if (_this.options.unload) {
-                        _this.unload();
+
+                    if (_this.options.modal) {
+                        _this.modal.css({ display: 'none' });
                     }
+
+                    // FIXME disabling option `unload: false`, needs to be re-enabled
+                    // if (_this.options.unload) {
+                        _this.unload();
+                    // }
                 });
 
                 this.messi.removeClass(this.options.animate.open).addClass(this.options.animate.close);
             } else {
-                this.messi.animate({
-                    opacity: 0
-                }, 300, function () {
-                    if (_this.options.modal) {
-                        _this.modal.css({
-                            display: 'none'
-                        });
-                    }
-                    _this.messi.css({
-                        display: 'none'
-                    });
+                if (_this.options.modal) {
+                    _this.modal.css({ display: 'none' });
+                }
 
-                    // Reactivate the scroll
-                    //document.documentElement.style.overflow = "visible";
-                    _this.visible = false;
-                    if (_this.options.unload) {
-                        _this.unload();
-                    }
-                });
+                _this.messi.css({ display: 'none' });
+
+                // Reactivate the scroll
+                //document.documentElement.style.overflow = "visible";
+
+                _this.visible = false;
+
+                // FIXME disabling option `unload: false`, needs to be re-enabled
+                // if (_this.options.unload) {
+                    _this.unload();
+                // }
             }
 
             return this;
 
         },
 
-        resize: function () {
-            if (this.options.modal) {
+        resize: function (event) {
+            var _this = event.data;
+            if (_this.options.modal) {
                 jQuery('.messi-modal')
                     .css({
                         width: jQuery(document).width(),
@@ -283,10 +284,10 @@
                     });
             }
 
-            if (this.options.center) {
-                this.center();
-            } else if(this.options.margin > 0) {
-                this.enforceMargin();
+            if (_this.options.center) {
+                _this.center();
+            } else if(_this.options.margin > 0) {
+                _this.enforceMargin();
             }
         },
 
@@ -300,8 +301,7 @@
                 this.hide();
             }
 
-            jQuery(window)
-                .unbind('resize scroll');
+            jQuery(window).off('resize.MessiJS scroll.MessiJS', Messi.prototype.resize);
 
             if (this.modal) {
                 this.modal.remove();

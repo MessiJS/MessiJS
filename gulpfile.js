@@ -3,12 +3,12 @@ var pkg = require('./package.json');
 var gulp        = require('gulp');
 var concat      = require('gulp-concat');
 var coveralls   = require('gulp-coveralls');
+var cssnano     = require('gulp-cssnano');
 var del         = require('del');
 var eventStream = require('event-stream');
 var insert      = require('gulp-insert');
 var jshint      = require('gulp-jshint');
 var Karma       = require('karma').Server;
-var minifyCSS   = require('gulp-minify-css');
 var notify      = require('gulp-notify');
 var rename      = require('gulp-rename');
 var sourcemaps  = require('gulp-sourcemaps');
@@ -25,7 +25,7 @@ var banner = [
     ' * @link ' + pkg.homepage,
     ' * @license ' + pkg.license,
     ' * @copyright Copyright 2012-13 Marcos Esperón',
-    ' * @copyright Copyright 2014 Kevin Gustavson',
+    ' * @copyright Copyright 2014-17 Kevin Gustavson',
     ' */',
     ''].join('\n');
 
@@ -62,12 +62,14 @@ gulp.task('compress', ['create-dist'], function() {
             .pipe(sourcemaps.init())
                 .pipe(concat('messi.min.js'))
                 .pipe(uglify())
-            .pipe(sourcemaps.write('dist'))
+            .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest('dist')),
 
         gulp.src(['src/*.css'])
-            .pipe(concat('messi.min.css'))
-            .pipe(minifyCSS())
+            //.pipe(sourcemaps.init())
+                .pipe(concat('messi.min.css'))
+                .pipe(cssnano())
+            //.pipe(sourcemaps.write('.'))
             .pipe(gulp.dest('dist'))
     );
 });

@@ -1,24 +1,23 @@
 language: node_js
 
 node_js:
-  - "4.1"
-  #- "4.0"
-  #- '0.12'
-  #- '0.10'
-  #- '0.11'
+  #- "6"
+  - "node"
 
 env:
   - JQUERY="jquery-1.7.0"
-  - JQUERY="jquery-1.11.3"
+  - JQUERY="jquery-1.12.4"
   - JQUERY="jquery-2.0.3"
-  - JQUERY="jquery-2.1.4"
+  - JQUERY="jquery-2.2.4"
+  - JQUERY="jquery-3.0.0"
+  - JQUERY="jquery-3.1.1"
 
 before_script:
   - curl http://code.jquery.com/${JQUERY}.min.js >jquery.min.js
   #- export DISPLAY=99.0
   #- sh -e /etc/init.d/xvfb start
 
-sudo: false
+#sudo: false
 
 branches:
   except:
