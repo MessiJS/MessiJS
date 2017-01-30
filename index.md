@@ -17,40 +17,49 @@ Display text, html content, images and ajax requests with 5KB code.
 
 Changelog
 ---------
-2.0.2 [Coming: Jan-2017]
 
-* Update [Animate.css](http://daneden.github.io/animate.css) to version 3.5.1
-* Update development dependencies
+**2.0.2 [29-Jan-2017]**
+
+Changes:
+
 * [Issue #70](https://github.com/MessiJS/MessiJS/issues/70): unload() unbinds all resize/scroll event handlers from the window
-* Fix an overlay bug when `{modal: true, unload: false}` is used
+* Update [Animate.css](http://daneden.github.io/animate.css) to version 3.5.1
+* Update build dependencies
+* Add missing build dependencies
 
-2.0.1 [23-Dec-2014]
+Removed:
+
+* Option `unload:false` was not functioning correctly and has been removed for this release
+_If you rely on this functionality, use your current version.
+I hope to re-enable it in a future version._
+
+**2.0.1 [23-Dec-2014]**
 
 * Added support for [Animate.css](http://daneden.github.io/animate.css). See [Options](//messijs.github.io/MessiJS/options/) for more details.
 * Cleaned up position\|viewport option handling.
 * Bug fixes.
 
-2.0 [08-Jul-2014]
+**2.0 [08-Jul-2014]**
 
 * Name changed to MessiJS (New Maintainer)
 * Gulp build process and Mocha tests
 * Now supporting IE9+
 
-1.3 [13-Mar-2013]
+**1.3 [13-Mar-2013]**
 
 * Fixed "class" attribute to work in IE8.
 
-1.2 [31-Jan-2013]
+**1.2 [31-Jan-2013]**
 
 * Send parameters to Messi.load() request.
 * Unbind resize event problem solved.
 * Minor CSS and JS fixes for IE browsers.
 
-1.1 [01-May-2012]
+**1.1 [01-May-2012]**
 
 * Added window resize control.
 
-1.0 [30-Apr-2012]
+**1.0 [30-Apr-2012]**
 
 * Initial release.
 
