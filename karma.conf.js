@@ -1,7 +1,6 @@
 module.exports = function(config) {
-
     config.set({
-        browsers: ['PhantomJS'],
+        browsers: ['Firefox'],
         coverageReporter: { type : 'lcov', dir : 'coverage/' },
         files: [
             'node_modules/mocha/mocha.js',
@@ -18,13 +17,13 @@ module.exports = function(config) {
         frameworks: ['mocha'],
         plugins: [
             'karma-coverage',
-            'karma-phantomjs-launcher',
+            'karma-firefox-launcher',
             'karma-mocha',
-            'karma-mocha-reporter'
-            // 'karma-osx-reporter'
+            'karma-mocha-reporter',
+            'karma-notify-reporter'
         ],
         preprocessors: {'src/*.js': ['coverage']},
-        reporters: ['mocha',/* 'osx'*/, 'coverage'],
+        reporters: ['mocha', 'notify', 'coverage'],
         singleRun: true
     });
 
