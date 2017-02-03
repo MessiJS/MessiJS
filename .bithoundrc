@@ -1,0 +1,19 @@
+{
+  "ignore": [
+    "bower_components/**",
+    "**/coverage/**",
+    "**/dist/**",
+    "**/gulpfile.js",
+    "**/**jquery.?(ui|effects)-*.*.?(*).?(cs|j)s",
+    "**/**jquery-*.*.?(*).?(cs|j)s",
+    "**/karma.conf.js",
+    "**/node_modules/**",
+    "**/vendor/**"
+  ],
+    "test": [
+    "**/spec/**",
+    "**/specs/**",
+    "**/test/**",
+    "**/tests/**"
+  ]
+}
