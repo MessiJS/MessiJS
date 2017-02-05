@@ -1,6 +1,6 @@
 {
   "name": "messijs",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A easy to use message plugin for jQuery",
   "main": "./dist/messi.js",
   "style": "./dist/messi.css",
@@ -37,7 +37,7 @@
   "bugs": {
     "url": "https://github.com/MessiJS/MessiJS/issues"
   },
-  "homepage": "https://MessiJS.github.io/",
+  "homepage": "https://MessiJS.github.io/MessiJS/",
   "devDependencies": {
     "chai": "^3.5.0",
     "del": "^2.2.2",

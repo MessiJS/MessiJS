@@ -16,18 +16,17 @@ const uglify      = require('gulp-uglify');
 const zip         = require('gulp-zip');
 const gutil       = require('gulp-util');
 
-const sources = ['src/*.js', 'test/*Spec.js'];
+const sources = ['src/Messi.*.js', 'extensions.js', 'test/*Spec.js'];
 
-const banner = [
-    '/**!',
-    ` * ${pkg.name} - ${pkg.description}`,
-    ` * @version ${pkg.version}`,
-    ` * @link ${pkg.homepage}`,
-    ` * @license ${pkg.license}`,
-    ' * @copyright Copyright 2012-13 Marcos Esperón',
-    ' * @copyright Copyright 2014-17 Kevin Gustavson',
-    ' */',
-    ''].join('\n');
+const banner = `/**!
+ * ${pkg.name} - ${pkg.description}
+ * @version ${pkg.version}
+ * @link ${pkg.homepage}
+ * @license ${pkg.license}
+ * @copyright Copyright 2012-13 Marcos Esperón
+ * @copyright Copyright 2014-17 Kevin Gustavson
+ */
+`;
 
 gulp.task('clean', done => del([ 'dist', 'coverage' ], done));
 
@@ -45,7 +44,7 @@ gulp.task('combine', ['create-dist'], () => eventStream.merge(
     gulp.src(['src/*.css'])
         .pipe(concat('messi.css'))
         .pipe(gulp.dest('dist')),
-    gulp.src(['src/*.js'])
+    gulp.src(['src/Messi.*.js', 'src/extensions.js'])
         .pipe(concat('messi.js'))
         .pipe(gulp.dest('dist'))
 ));
