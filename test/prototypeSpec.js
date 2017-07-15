@@ -1,6 +1,6 @@
 context('Main Prototype', () => {
     'use strict';
-    let dialog = null;
+    var dialog = null;
 
     it('should toggle the dialog', done => {
         dialog = new Messi('my message');

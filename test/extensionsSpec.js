@@ -1,6 +1,6 @@
 context('Messi Extensions', () => {
     describe('Create a Messi.alert()', () => {
-        let dialog = null;
+        var dialog = null;
 
         beforeEach(() => {
             dialog = Messi.alert('This is an alert with Messi.');
@@ -24,7 +24,7 @@ context('Messi Extensions', () => {
     });
 
     describe('Create a Messi.ask() to launch a fast yes/no message', () => {
-        let dialog = null;
+        var dialog = null;
 
         beforeEach(() => {
             dialog = Messi.ask(
