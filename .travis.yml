@@ -1,8 +1,8 @@
 language: node_js
 
 node_js:
-  - "6"
-  #- "node"
+  #- "6"
+  - "node"
 
 env:
   - JQUERY="jquery-1.7.0"
