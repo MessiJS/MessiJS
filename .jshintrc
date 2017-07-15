@@ -15,6 +15,14 @@
     "trailing":  true,
     "undef":     false,
     "unused":    false,
+    "esversion": 6,
+
+    "predef":    [
+        "describe",
+        "it",
+        "context",
+        "specify"
+    ],
 
     "jquery":    true
 }

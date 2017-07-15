@@ -75,10 +75,15 @@ gulp.task('add-banner', ['combine', 'compress'], () => eventStream.merge(
         .pipe(gulp.dest('dist'))
 ));
 
-gulp.task('test', ['lint'], done => Karma.start({
-    configFile: `${__dirname}/karma.conf.js`,
-    singleRun: true
-}, done));
+gulp.task('test', ['lint'], done => {
+    new Karma({
+        configFile: `${__dirname}/karma.conf.js`,
+        singleRun: true
+    }, exitCode => {
+        done();
+        process.exit(exitCode);
+    }).start();
+});
 
 gulp.task('codecoverage', ['test'], done => gulp.src('coverage/**/lcov.info')
     .pipe(coveralls(done)));
@@ -87,14 +92,13 @@ gulp.task('zip', ['add-banner'], () => gulp.src('dist/*')
     .pipe(zip('MessiJS.zip'))
     .pipe(gulp.dest('dist')));
 
-gulp.task('watch', () => gulp.watch(sources, ['default']));
-
 gulp.task('notify:test', ['test'], () => gulp.src('./gulpfile.js')
     .pipe(notify({ message: 'All done, master!' })));
 
 gulp.task('notify:zip', ['zip'], () => gulp.src('./gulpfile.js')
     .pipe(notify({ message: 'Zip file has been created.' })));
 
+gulp.task('watch', () => gulp.watch(sources, ['default']));
 gulp.task('default', ['zip', 'test']);
 gulp.task('travis-test', ['codecoverage']);
 

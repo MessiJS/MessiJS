@@ -1,13 +1,10 @@
-node_modules/
-coverage/
-.coveralls.yml
-jquery.js
-jquery.min.js
-#dist/
-
 .bundle/
+.coveralls.yml
 .idea/
 Gemfile.lock
 _site/
 bin/
+coverage/
+jquery*
+node_modules/
 vendor/
