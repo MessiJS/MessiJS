@@ -36,24 +36,21 @@ jQuery.extend(Messi, {
     },
 
     img: function (src, options) {
-
+        var ratio;
         var img = new Image();
-
-        jQuery(img).load(function () {
-
+        img.src = src;
+        img.addEventListener('load', function() {
             var vp = {
                 width: jQuery(window).width() - 50,
                 height: jQuery(window).height() - 50
             };
-            var ratio = (this.width > vp.width || this.height > vp.height) ?
+
+            ratio = (this.width > vp.width || this.height > vp.height) ?
                 Math.min(vp.width / this.width, vp.height / this.height) :
                 1;
 
-            jQuery(img)
-                .css({
-                    width: this.width * ratio,
-                    height: this.height * ratio
-                });
+            img.width = img.width * ratio;
+            img.height = img.height * ratio;
 
             options = jQuery.extend(
                 {
@@ -66,20 +63,9 @@ jQuery.extend(Messi, {
                 },
                 options
             );
+        });
 
-            new Messi(img, options);
-
-        })
-        .error(function () {
-
-            // Be IE friendly
-            if (typeof window.console === 'object') {
-                console.log('Error loading ' + src);
-            }
-
-        })
-        .attr('src', src);
-
+        return new Messi(img, options);
     },
 
     load: function (url, options) {
