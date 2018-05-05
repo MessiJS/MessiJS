@@ -40,16 +40,17 @@
   "homepage": "https://MessiJS.github.io/",
   "dependencies": {},
   "devDependencies": {
+    "autoprefixer": "^8.4.1",
     "chai": "^4.1.2",
     "del": "^3.0.0",
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-coveralls": "^0.1.4",
-    "gulp-cssnano": "^2.1.3",
     "gulp-insert": "^0.5.0",
     "gulp-jshint": "^2.1.0",
     "gulp-notify": "^3.2.0",
+    "gulp-postcss": "^7.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
@@ -62,11 +63,20 @@
     "karma-coverage": "^1.1.2",
     "karma-mocha": "^1.3.0",
     "karma-mocha-reporter": "^2.2.5",
-    "karma-osx-reporter": "^0.2.1",
     "karma-phantomjs-launcher": "^1.0.4",
     "mocha": "^5.1.1",
     "mocha-lcov-reporter": "^1.3.0",
+    "postcss-plugin": "^1.0.0",
     "pre-commit": "^1.2.2",
     "sinon": "^5.0.3"
+  },
+  "postcss": {
+    "map": true,
+    "from": "src.sss",
+    "to": "dest.css",
+    "plugins": {
+      "postcss-plugin": {},
+      "autoprefixer": {}
+    }
   }
 }

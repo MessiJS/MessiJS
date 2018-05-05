@@ -3,13 +3,13 @@ var pkg = require('./package.json');
 var gulp        = require('gulp');
 var concat      = require('gulp-concat');
 var coveralls   = require('gulp-coveralls');
-var cssnano     = require('gulp-cssnano');
 var del         = require('del');
 var eventStream = require('event-stream');
 var insert      = require('gulp-insert');
 var jshint      = require('gulp-jshint');
 var Karma       = require('karma').Server;
 var notify      = require('gulp-notify');
+var postcss     = require('gulp-postcss');
 var rename      = require('gulp-rename');
 var sourcemaps  = require('gulp-sourcemaps');
 var uglify      = require('gulp-uglify');
@@ -68,7 +68,7 @@ gulp.task('compress', ['create-dist'], function() {
         gulp.src(['src/*.css'])
             //.pipe(sourcemaps.init())
                 .pipe(concat('messi.min.css'))
-                .pipe(cssnano())
+                .pipe(postcss())
             //.pipe(sourcemaps.write('.'))
             .pipe(gulp.dest('dist'))
     );
