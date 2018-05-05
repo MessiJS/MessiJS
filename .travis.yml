@@ -11,6 +11,7 @@ env:
   - JQUERY="jquery-2.2.4"
   - JQUERY="jquery-3.0.0"
   - JQUERY="jquery-3.1.1"
+  - JQUERY="jquery-3.3.1"
 
 before_script:
   - curl http://code.jquery.com/${JQUERY}.min.js >jquery.min.js
